@@ -12,15 +12,55 @@ public class Riddler {
         String decrypted = "";
 
         // TODO: Complete the decryptOne() function.
+        int i = 0;
+        int ascii = 0;
+        while(i < encrypted.length()){
+            if((int) encrypted.charAt(i) < 65 || (int) encrypted.charAt(i) > 122){
+                decrypted += encrypted.charAt(i);
+            }
+            else{
+                // get ascii value
+                ascii = (int) encrypted.charAt(i) + 9;
+                // check if upper case
+                if(Character.isUpperCase(encrypted.charAt(i))){
+                    // check if ascii value is too big
+                    if(ascii > 90){
+                        ascii = (ascii - 90) + 65;
+                    }
+                }
+                // If lower case
+                else{
+                    // check if ascii value is too big
+                    if(ascii > 122){
+                        ascii = (ascii - 122) + 97;
+                    }
+                }
+                decrypted += String.valueOf(ascii);
+            }
+            i++;
+        }
+
 
         return decrypted;
     }
 
     public String decryptTwo(String encrypted) {
         String decrypted = "";
-
+        String num = "";
+        String letter = "";
+        int i = 0;
         // TODO: Complete the decryptTwo() function.
-
+        while(i < encrypted.length()){
+            if(encrypted.charAt(i) == ' '){
+                i++;
+                letter = String.valueOf(Integer.parseInt(num));
+                decrypted += letter;
+                letter = "";
+                num = "";
+            }
+            num += encrypted.charAt(i);
+            i++;
+        }
         return decrypted;
     }
 
