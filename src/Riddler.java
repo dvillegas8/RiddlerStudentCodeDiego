@@ -66,9 +66,14 @@ public class Riddler {
 
     public String decryptThree(String encrypted) {
         String decrypted = "";
-
+        int i = 0;
+        String binary = "";
         // TODO: Complete the decryptThree() function.
-
+        while(i < encrypted.length()){
+            binary = encrypted.substring(i, i + 7);
+            decrypted += Integer.parseInt(binary, 2);
+            i = i + 8;
+        }
         return decrypted;
     }
 
