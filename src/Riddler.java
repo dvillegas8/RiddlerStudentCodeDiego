@@ -70,6 +70,7 @@ public class Riddler {
         String binary = "";
         // TODO: Complete the decryptThree() function.
         while(i < encrypted.length()){
+            // Grab each byte
             binary = encrypted.substring(i, i + 7);
             decrypted += Integer.parseInt(binary, 2);
             i = i + 8;
