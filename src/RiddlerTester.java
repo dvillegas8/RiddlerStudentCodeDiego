@@ -27,7 +27,7 @@ public class RiddlerTester {
     @Test
     public void testFour() {
         setTestData("4");
-        solver.decryptOne(encrypted);
+        solver.decryptFour(encrypted);
     }
 
     private void setTestData(String text) {

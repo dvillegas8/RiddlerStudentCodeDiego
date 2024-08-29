@@ -14,55 +14,61 @@ public class Riddler {
         // TODO: Complete the decryptOne() function.
         int i = 0;
         int ascii = 0;
+        int shift = 9;
         while(i < encrypted.length()){
-            // if chart at i is anything but a letter
-            if((int) encrypted.charAt(i) < 65 || (int) encrypted.charAt(i) > 122){
+            // If chart at i is anything but a letter
+            if(encrypted.charAt(i) < 'A' || encrypted.charAt(i) > 'z'){
                 decrypted += encrypted.charAt(i);
             }
             else{
-                // get ascii value
-                ascii = (int) encrypted.charAt(i) + 9;
-                // check if upper case
+                // Get ascii value of letter
+                ascii = encrypted.charAt(i);
+                // Check if upper case
                 if(Character.isUpperCase(encrypted.charAt(i))){
-                    // check if ascii value is too big
-                    if(ascii > 90){
-                        // makes sure ascii value is a upper case letter
-                        ascii = (ascii - 90) + 65;
+                    // Get the actual letter
+                    ascii += shift;
+                    // check if ascii value is too big (bigger than Z)
+                    if(ascii > 'Z'){
+                        // Do this so that letter won't be 1 ascii value higher
+                        ascii--;
+                        // makes sure ascii value is a upper case letter, 90 = Z, 65 = A
+                        ascii = ascii - 'Z' + 'A';
                     }
                 }
                 // If lower case
                 else{
-                    // check if ascii value is too big
-                    if(ascii > 122){
-                        // makes sure ascii value is a lower case letter
-                        ascii = (ascii - 122) + 97;
+                    // Get the actual letter
+                    ascii += shift;
+                    // check if ascii value is too big (bigger than z)
+                    if(ascii > 'z'){
+                        // Do this so that letter won't be 1 ascii value higher
+                        ascii--;
+                        // makes sure ascii value is a lower case letter, 122 = z, 97 = a
+                        ascii = ascii - 'z' + 'a';
                     }
                 }
-                // Convert int to string
-                decrypted += String.valueOf(ascii);
+                // Convert int to char
+                decrypted += (char) ascii;
             }
             i++;
         }
-
-
         return decrypted;
     }
 
     public String decryptTwo(String encrypted) {
         String decrypted = "";
         String num = "";
-        String letter = "";
+        int letter = 0;
         int i = 0;
         // TODO: Complete the decryptTwo() function.
         while(i < encrypted.length()){
             // If char is a space
             if(encrypted.charAt(i) == ' '){
                 i++;
-                // Turn num into a string
-                letter = String.valueOf(Integer.parseInt(num));
-                decrypted += letter;
+                // Turn num an int
+                letter = Integer.parseInt(num);
+                decrypted += (char) letter;
                 // Reset
-                letter = "";
                 num = "";
             }
             num += encrypted.charAt(i);
@@ -78,9 +84,9 @@ public class Riddler {
         // TODO: Complete the decryptThree() function.
         while(i < encrypted.length()){
             // Grab each byte
-            binary = encrypted.substring(i, i + 7);
-            // Convert String(byte) to String
-            decrypted += Integer.parseInt(binary, 2);
+            binary = encrypted.substring(i, i + 8);
+            // Convert String (byte) to String and cast it to a char
+            decrypted += (char) (Integer.parseInt(binary, 2));
             i = i + 8;
         }
         return decrypted;
@@ -90,7 +96,19 @@ public class Riddler {
         String decrypted = "";
 
         // TODO: Complete the decryptFour() function.
-
+        int i = 0;
+        int ascii = 0;
+        int letter = 0;
+        int difference = 9919;
+        while(i < encrypted.length()){
+            // Turn character into ascii number
+            ascii = encrypted.charAt(i);
+            // Calculate from Dingbat to letter
+            letter = ascii - difference;
+            // Turn Ascii value into string
+            decrypted += (char) letter;
+            i++;
+        }
         return decrypted;
     }
 }
